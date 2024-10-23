@@ -30,3 +30,8 @@ ex: npx playwright codegen -o .\tests\PlayWrightCodeGen.spec.js
 5. page.getByAltText(): to locate an element, usually image, bt its text alternative
 6. page.getByTitle(): to locate an element by its title attribute
 7. page.getByTestId(): to locate an element based on its data-testid attribute (other attributes can be configured)
+
+# Capture screenshot after test failed
+### run code:
+npx playwright test ..... + "--trace on"
+ex: npx playwright test -g "Filter Locator" --trace on
