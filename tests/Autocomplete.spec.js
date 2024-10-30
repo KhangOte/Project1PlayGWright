@@ -2,7 +2,7 @@
 
 const {test, expect} = require("@playwright/test");
 
-test('Auto compelte',async({page}) =>{
+test('Auto compelte',async({page},testInfo) =>{
 
     await page.goto('https://www.google.com/');
     await page.locator("//textarea[@class = 'gLFyf']").fill('openweather')
@@ -18,9 +18,19 @@ test('Auto compelte',async({page}) =>{
     //   });
     await page.waitForURL('https://openweathermap.org/');
 
-    await page.locator("//li[@id = 'desktop-menu']/form/input[1]").fill("ha noi");
+    await page.locator("//input[@placeholder = 'Search city']").fill("ha noi");
+    await page.click("//button[@class = 'button-round dark']");
+    await page.waitForSelector("//ul[@class = 'search-dropdown-menu']//li[1]");
 
-    await page.waitForTimeout(10000);
+    // await page.screenshot({path: "Screenshots/home.png"});
+    await testInfo.attach("home",{
+        body: await page.screenshot(),
+        contentType: "image/png",
+    })
+
+    await page.click("//ul[@class = 'search-dropdown-menu']//li[1]");
+
+    // await page.waitForTimeout(10000);
 
 })
 
