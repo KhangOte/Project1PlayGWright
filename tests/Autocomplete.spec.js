@@ -24,7 +24,7 @@ test('Auto compelte',async({page},testInfo) =>{
 
     // await page.screenshot({path: "Screenshots/home.png"});
     await testInfo.attach("home",{
-        body: await page.screenshot(),
+        body: await page.screenshot(), // => capture and add screenshot into report
         contentType: "image/png",
     })
 
