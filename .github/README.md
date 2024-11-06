@@ -32,6 +32,10 @@ ex: npx playwright codegen -o .\tests\PlayWrightCodeGen.spec.js
 7. page.getByTestId(): to locate an element based on its data-testid attribute (other attributes can be configured)
 
 # Capture screenshot after test failed
+await testInfo.attach("home",{
+        body: await page.screenshot(), // => capture and add screenshot into report
+        contentType: "image/png",
+    })
 ### run code:
 npx playwright test ..... + "--trace on"
 ex: npx playwright test -g "Filter Locator" --trace on

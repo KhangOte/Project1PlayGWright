@@ -3,7 +3,7 @@
 const {test, expect} = require ("@playwright/test");
 const { assert } = require("console");
 
-test ('Test APIKeys', async({page}, testInfo) => {
+test ('Test Create And Delete func for APIKeys', async({page}, testInfo) => {
 
     const KeysAPI = "TestPlaywrights";
 
@@ -24,9 +24,20 @@ test ('Test APIKeys', async({page}, testInfo) => {
     })
 
     const nameAPIKeyCreated = await page.locator("//table[@class = 'material_table api-keys']//tbody[1]//tr[2]//td[2]").textContent();
+    console.log(nameAPIKeyCreated);
     expect(KeysAPI).toEqual(nameAPIKeyCreated);
 
-    await page.locator("//a[@href = '/api_keys/6728b8dbfe4ca40007468fe2']").click();
     
+    await page.on("dialog", async(a)=>{
 
+        console.log(await a.message()) //=> alow alert display
+        a.accept()
+    })
+
+    await page.locator("//tr[2]//td[4]//i[@class = 'fa fa-remove']").click();
+
+    await testInfo.attach("home",{
+        body: await page.screenshot(), // => capture and add screenshot into report
+        contentType: "image/png",
+    })
 });
