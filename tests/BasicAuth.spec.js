@@ -31,4 +31,6 @@ test('Basic auth tech', async ({page}, testInfo) =>{
         body: await page.screenshot(), // => capture and add screenshot into report
         contentType: "image/png",
     })
+
+    await page.waitForTimeout(7000);
 })
